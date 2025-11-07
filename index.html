@@ -1,38 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Civic Association IZEX</title>
-  <link rel="icon" type="image/png" href="IZEX LOGO.png">
+  <link rel="icon" type="image/png" href="IZEX LOGO.png" />
   <style>
-    body {font-family: 'Inter', sans-serif; margin: 0; color: #1e293b; background-color: #f9fafb;}
-    header {background: linear-gradient(90deg, #2563eb, #1d4ed8); color: white; padding: 3rem 1rem; text-align: center; position: relative;}
-    header a.logo-link {position: absolute; top: 1rem; left: 1rem; display: inline-block;}
-    header img {height: 80px; border-radius: 8px; transition: transform 0.2s ease;}
-    header img:hover {transform: scale(1.05);}
-    header h1 {font-size: 2.5rem; margin: 0;}
-    header p {font-size: 1.25rem; margin-top: 0.5rem;}
-    nav {background: #1e3a8a; color: white; display: flex; justify-content: center; gap: 2rem; padding: 1rem 0; position: relative;}
-    nav a {color: white; text-decoration: none; font-weight: 500;}
-    .lang-switch {position: absolute; right: 2rem; top: 1rem; color: white; cursor: pointer; font-weight: 600;}
-    .lang-switch span {margin-left: 0.5rem; cursor: pointer;}
-    section {max-width: 1000px; margin: 2rem auto; padding: 0 1rem;}
-    section h2 {color: #1e3a8a; border-left: 5px solid #2563eb; padding-left: 0.5rem;}
-    footer {background: #1e3a8a; color: white; text-align: center; padding: 2rem 1rem; margin-top: 3rem;}
-    .projects, .partners {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;}
-    .card {background: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);}
+    /* Basic layout */
+    :root{--accent:#2563eb;--nav:#1e3a8a;--text:#0f172a}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--text)}
+    /* Video background container */
+    .hero {
+      position:relative;
+      min-height:60vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .video-wrap, .video-wrap video {
+      position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
+    }
+    /* overlay for readability */
+    .overlay {
+      position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,30,80,0.45), rgba(8,30,80,0.55));
+      pointer-events:none;
+    }
+    header {position:relative; z-index:5; padding:1rem 1rem 2rem; text-align:center; color:#fff}
+    header .logo-link{position:absolute; left:1rem; top:1rem}
+    header img{height:64px; border-radius:8px}
+    header h1{margin:0; font-size:2rem}
+    header p{margin:0.25rem 0 0.75rem}
+    nav{background:var(--nav); color:#fff; display:flex; justify-content:center; gap:1.25rem; padding:0.8rem; position:sticky; top:0; z-index:6}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    .lang-switch{position:absolute; right:1rem; top:0.6rem; z-index:7; display:flex; gap:0.5rem; align-items:center}
+    .flag-btn{display:inline-flex; align-items:center; gap:0.4rem; padding:6px 8px; background:rgba(255,255,255,0.08); border-radius:6px; cursor:pointer; color:#fff}
+    .flag-emoji{font-size:1.05rem}
+    /* content */
+    main{position:relative; z-index:6; max-width:1100px; margin:2rem auto; padding:0 1rem}
+    section{background:#fff; padding:1.2rem; border-radius:10px; margin-bottom:1rem; box-shadow:0 4px 18px rgba(2,6,23,0.06)}
+    section h2{color:var(--nav); margin-top:0; border-left:4px solid var(--accent); padding-left:.6rem}
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem}
+    .card{padding:1rem; background:#f8fafc; border-radius:8px}
+    footer{background:var(--nav); color:#fff; padding:1rem; text-align:center; margin-top:1.5rem; border-radius:0 0 0 0}
+    /* small screens */
+    @media (max-width:640px){
+      header h1{font-size:1.4rem}
+      .lang-switch{right:0.6rem; top:0.4rem}
+    }
   </style>
 </head>
 <body>
-  <header>
-    <a href="#home" class="logo-link">
-      <img src="IZEX LOGO.png" alt="Logo of Civic Association IZEX - representing innovation, digital education, and collaboration">
-    </a>
-    <h1 id="home" data-en="Civic Association IZEX" data-sk="Občianske združenie IZEX">Civic Association IZEX</h1>
-    <p data-en="Connecting People, Innovation, and Digital Skills" data-sk="Spájame ľudí, inovácie a digitálne zručnosti">Connecting People, Innovation, and Digital Skills</p>
-  </header>
+  <!-- hero / video background -->
+  <div class="hero" id="hero">
+    <div class="video-wrap" id="video-wrap" aria-hidden="true">
+      <!-- video element will be inserted by JS -->
+      <video id="bgVideo" playsinline muted autoplay loop></video>
+    </div>
+    <div class="overlay" aria-hidden="true"></div>
 
+    <header>
+      <a class="logo-link" href="#home"><img src="IZEX LOGO.png" alt="Logo of Civic Association IZEX - representing innovation, digital education, and collaboration"></a>
+      <h1 id="site-title" data-en="Civic Association IZEX" data-sk="Občianske združenie IZEX">Civic Association IZEX</h1>
+      <p id="site-sub" data-en="Connecting People, Innovation, and Digital Skills" data-sk="Spájame ľudí, inovácie a digitálne zručnosti">Connecting People, Innovation, and Digital Skills</p>
+    </header>
+
+    <!-- language & flags -->
+    <div class="lang-switch" role="navigation" aria-label="Language switch">
+      <div id="enFlag" class="flag-btn" title="English" aria-pressed="false">
+        <span class="flag-emoji">🇬🇧</span><span data-en="EN" data-sk="EN">EN</span>
+      </div>
+      <div id="skFlag" class="flag-btn" title="Slovenčina" aria-pressed="false">
+        <span class="flag-emoji">🇸🇰</span><span data-en="SK" data-sk="SK">SK</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- navigation bar -->
   <nav>
     <a href="#about" data-en="About" data-sk="O nás">About</a>
     <a href="#projects" data-en="Projects" data-sk="Projekty">Projects</a>
@@ -40,50 +85,79 @@
     <a href="#partners" data-en="Partners" data-sk="Partneri">Partners</a>
     <a href="#news" data-en="News" data-sk="Novinky">News</a>
     <a href="#contact" data-en="Contact" data-sk="Kontakt">Contact</a>
-    <div class="lang-switch">🌐 <span id="en-btn">EN</span> | <span id="sk-btn">SK</span></div>
   </nav>
 
-  <section id="about">
-    <h2 data-en="About Us" data-sk="O nás">About Us</h2>
-    <p data-en="Civic Association IZEX is a Slovak non-profit organisation promoting innovation, digital education, and community development. Our mission is to enhance digital skills, foster inclusion, and connect education, technology, and society."
-       data-sk="Občianske združenie IZEX je slovenská nezisková organizácia podporujúca inovácie, digitálne vzdelávanie a rozvoj komunít. Naším cieľom je rozvíjať digitálne zručnosti, podporovať inklúziu a prepájať vzdelávanie, technológie a spoločnosť.">
-       Civic Association IZEX is a Slovak non-profit organisation promoting innovation, digital education, and community development. Our mission is to enhance digital skills, foster inclusion, and connect education, technology, and society.
-    </p>
-  </section>
+  <main>
+    <section id="about">
+      <h2 data-en="About Us" data-sk="O nás">About Us</h2>
+      <p data-en="Civic Association IZEX is a Slovak non-profit organisation promoting innovation, digital education, and community development. Our mission is to enhance digital skills, foster inclusion, and connect education, technology, and society."
+         data-sk="Občianske združenie IZEX je slovenská nezisková organizácia podporujúca inovácie, digitálne vzdelávanie a rozvoj komunít. Naším cieľom je rozvíjať digitálne zručnosti, podporovať inklúziu a prepájať vzdelávanie, technológie a spoločnosť.">
+         Civic Association IZEX is a Slovak non-profit organisation promoting innovation, digital education, and community development. Our mission is to enhance digital skills, foster inclusion, and connect education, technology, and society.
+      </p>
+    </section>
 
-  <section id="projects">
-    <h2 data-en="Projects" data-sk="Projekty">Projects</h2>
-    <div class="projects">
-      <div class="card">
-        <h3 data-en="Digital Skills for Youth and Communities (2025–2026)" data-sk="Digitálne zručnosti pre mládež a komunity (2025–2026)">Digital Skills for Youth and Communities (2025–2026)</h3>
-        <p data-en="Workshops and mentoring focused on developing digital competences for students, educators, and communities in Eastern Slovakia."
-           data-sk="Workshopy a mentoring zamerané na rozvoj digitálnych kompetencií pre študentov, pedagógov a komunity na východnom Slovensku.">
-           Workshops and mentoring focused on developing digital competences for students, educators, and communities in Eastern Slovakia.
-        </p>
+    <section id="projects">
+      <h2 data-en="Projects" data-sk="Projekty">Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <h3 data-en="Digital Skills for Youth and Communities (2025–2026)" data-sk="Digitálne zručnosti pre mládež a komunity (2025–2026)">Digital Skills for Youth and Communities (2025–2026)</h3>
+          <p data-en="Workshops and mentoring focused on developing digital competences for students, educators, and communities in Eastern Slovakia."
+             data-sk="Workshopy a mentoring zamerané na rozvoj digitálnych kompetencií pre študentov, pedagógov a komunity na východnom Slovensku.">
+             Workshops and mentoring focused on developing digital competences for students, educators, and communities in Eastern Slovakia.
+          </p>
+        </div>
+        <div class="card">
+          <h3 data-en="Local Innovation Network" data-sk="Lokálna sieť inovácií">Local Innovation Network</h3>
+          <p data-en="Connecting municipalities, NGOs, and businesses to promote digital inclusion and innovation in rural areas."
+             data-sk="Prepájame samosprávy, neziskové organizácie a podniky s cieľom podporiť digitálnu inklúziu a inovácie vo vidieckych oblastiach.">
+             Connecting municipalities, NGOs, and businesses to promote digital inclusion and innovation in rural areas.
+          </p>
+        </div>
+        <div class="card">
+          <h3 data-en="Erasmus+ Cooperation" data-sk="Spolupráca v rámci programu Erasmus+">Erasmus+ Cooperation</h3>
+          <p data-en="Building partnerships across Europe to exchange best practices in digital education and training."
+             data-sk="Budujeme partnerstvá po celej Európe s cieľom výmeny najlepších skúseností v oblasti digitálneho vzdelávania a tréningu.">
+             Building partnerships across Europe to exchange best practices in digital education and training.
+          </p>
+        </div>
       </div>
-      <div class="card">
-        <h3 data-en="Local Innovation Network" data-sk="Lokálna sieť inovácií">Local Innovation Network</h3>
-        <p data-en="Connecting municipalities, NGOs, and businesses to promote digital inclusion and innovation in rural areas."
-           data-sk="Prepájame samosprávy, neziskové organizácie a podniky s cieľom podporiť digitálnu inklúziu a inovácie vo vidieckych oblastiach.">
-           Connecting municipalities, NGOs, and businesses to promote digital inclusion and innovation in rural areas.
-        </p>
-      </div>
-      <div class="card">
-        <h3 data-en="Erasmus+ Cooperation" data-sk="Spolupráca v rámci programu Erasmus+">Erasmus+ Cooperation</h3>
-        <p data-en="Building partnerships across Europe to exchange best practices in digital education and training."
-           data-sk="Budujeme partnerstvá po celej Európe s cieľom výmeny najlepších skúseností v oblasti digitálneho vzdelávania a tréningu.">
-           Building partnerships across Europe to exchange best practices in digital education and training.
-        </p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact">
-    <h2 data-en="Contact" data-sk="Kontakt">Contact</h2>
-    <p><strong data-en="Address:" data-sk="Adresa:">Address:</strong> J. Cirbusovej 770/5, 083 01 Sabinov, Slovakia</p>
-    <p><strong>Email:</strong> marko.pribula@gmail.com</p>
-    <p><strong data-en="Phone:" data-sk="Telefón:">Phone:</strong> +421 905 478 420</p>
-  </section>
+    <section id="partners">
+      <h2 data-en="Partners" data-sk="Partneri">Partners</h2>
+      <div class="grid">
+        <div class="card">
+          <h3 data-en="University Partners" data-sk="Univerzitní partneri">University Partners</h3>
+          <p data-en="Collaboration with European universities and research institutions on projects in digital education and innovation."
+             data-sk="Spolupráca s európskymi univerzitami a výskumnými inštitúciami na projektoch digitálneho vzdelávania a inovácií.">
+             Collaboration with European universities and research institutions on projects in digital education and innovation.
+          </p>
+        </div>
+        <div class="card">
+          <h3 data-en="Business and Technology" data-sk="Podniky a technológie">Business and Technology</h3>
+          <p data-en="Partnerships with SMEs and technology companies supporting digital transformation, innovation, and training initiatives."
+             data-sk="Partnerstvá s MSP a technologickými firmami, ktoré podporujú digitálnu transformáciu, inovácie a vzdelávacie iniciatívy.">
+             Partnerships with SMEs and technology companies supporting digital transformation, innovation, and training initiatives.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <h2 data-en="News" data-sk="Novinky">News</h2>
+      <p data-en="Coming soon: updates on our workshops, collaborations, and new project calls."
+         data-sk="Už čoskoro: novinky o našich workshopoch, spoluprácach a nových projektových výzvach.">
+         Coming soon: updates on our workshops, collaborations, and new project calls.
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2 data-en="Contact" data-sk="Kontakt">Contact</h2>
+      <p><strong data-en="Address:" data-sk="Adresa:">Address:</strong> J. Cirbusovej 770/5, 083 01 Sabinov, Slovakia</p>
+      <p><strong>Email:</strong> marko.pribula@gmail.com</p>
+      <p><strong data-en="Phone:" data-sk="Telefón:">Phone:</strong> +421 905 478 420</p>
+    </section>
+  </main>
 
   <footer>
     <p data-en="© 2025 Civic Association IZEX — Empowering Digital Communities"
@@ -93,27 +167,61 @@
   </footer>
 
   <script>
-    const enBtn = document.getElementById('en-btn');
-    const skBtn = document.getElementById('sk-btn');
+    /********** Video sources: replace these demo URLs with direct MP4 links from Pexels if available **********/
+    const videoSources = [
+      // demo / sample files (small). Replace with Pexels MP4 links for real content.
+      "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
+    ];
+
+    const bgVideo = document.getElementById('bgVideo');
+    let current = 0;
+
+    function loadVideo(idx){
+      // set src and try to play
+      bgVideo.src = videoSources[idx];
+      bgVideo.load();
+      bgVideo.play().catch(()=>{/* autoplay may be blocked on some mobile browsers */});
+    }
+
+    // Cycle videos every N seconds (e.g., show each for 10s)
+    const DISPLAY_SECONDS = 10;
+    loadVideo(current);
+    setInterval(() => {
+      current = (current + 1) % videoSources.length;
+      // fade effect
+      document.querySelector('.video-wrap').style.opacity = 0;
+      setTimeout(() => {
+        loadVideo(current);
+        document.querySelector('.video-wrap').style.opacity = 1;
+      }, 500);
+    }, DISPLAY_SECONDS * 1000);
+
+    /********** Language switching (auto-detect + manual) **********/
+    const enBtn = document.getElementById('enFlag');
+    const skBtn = document.getElementById('skFlag');
     const allElements = document.querySelectorAll('[data-en]');
 
-    function setLanguage(lang) {
+    function setLanguage(lang){
       allElements.forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
+        const txt = el.getAttribute('data-' + lang);
+        if(txt !== null) el.textContent = txt;
       });
+      // update aria-pressed
+      enBtn.setAttribute('aria-pressed', lang === 'en');
+      skBtn.setAttribute('aria-pressed', lang === 'sk');
     }
 
-    // Manual switch
-    enBtn.addEventListener('click', () => setLanguage('en'));
-    skBtn.addEventListener('click', () => setLanguage('sk'));
+    enBtn.addEventListener('click', ()=>setLanguage('en'));
+    skBtn.addEventListener('click', ()=>setLanguage('sk'));
 
-    // Auto-detect based on browser language
-    const userLang = navigator.language || navigator.userLanguage;
-    if (userLang.startsWith('sk')) {
-      setLanguage('sk');
-    } else {
-      setLanguage('en');
-    }
+    // Auto-detect browser language (use SK if startsWith 'sk', else EN)
+    const userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    if(userLang.startsWith('sk')) setLanguage('sk'); else setLanguage('en');
+
+    /********** Accessibility: if video playback prevented, ensure overlay and content visible **********/
+    bgVideo.addEventListener('error', ()=>{ console.warn('Background video failed to load.'); });
   </script>
 </body>
 </html>
