@@ -78,54 +78,11 @@
     </div>
   </section>
 
-  <section id="cooperation">
-    <h2 data-en="Cooperation" data-sk="Spolupráca">Cooperation</h2>
-    <p data-en="IZEX welcomes cooperation with universities, SMEs, NGOs, and public institutions in European projects supporting advanced digital skills, innovation, and community engagement."
-       data-sk="IZEX víta spoluprácu s univerzitami, malými a strednými podnikmi, mimovládnymi organizáciami a verejnými inštitúciami na európskych projektoch podporujúcich pokročilé digitálne zručnosti, inovácie a zapojenie komunít.">
-       IZEX welcomes cooperation with universities, SMEs, NGOs, and public institutions in European projects supporting advanced digital skills, innovation, and community engagement.
-    </p>
-  </section>
-
-  <section id="partners">
-    <h2 data-en="Partners" data-sk="Partneri">Partners</h2>
-    <div class="partners">
-      <div class="card">
-        <h3 data-en="University Partners" data-sk="Univerzitní partneri">University Partners</h3>
-        <p data-en="Collaboration with European universities and research institutions on projects in digital education and innovation."
-           data-sk="Spolupráca s európskymi univerzitami a výskumnými inštitúciami na projektoch digitálneho vzdelávania a inovácií.">
-           Collaboration with European universities and research institutions on projects in digital education and innovation.
-        </p>
-      </div>
-      <div class="card">
-        <h3 data-en="Business and Technology" data-sk="Podniky a technológie">Business and Technology</h3>
-        <p data-en="Partnerships with SMEs and technology companies supporting digital transformation, innovation, and training initiatives."
-           data-sk="Partnerstvá s MSP a technologickými firmami, ktoré podporujú digitálnu transformáciu, inovácie a vzdelávacie iniciatívy.">
-           Partnerships with SMEs and technology companies supporting digital transformation, innovation, and training initiatives.
-        </p>
-      </div>
-      <div class="card">
-        <h3 data-en="Non-Governmental and Public Sector" data-sk="Mimovládny a verejný sektor">Non-Governmental and Public Sector</h3>
-        <p data-en="Cooperation with municipalities, regional authorities, and NGOs on projects fostering community engagement and digital inclusion."
-           data-sk="Spolupráca so samosprávami, regionálnymi úradmi a neziskovými organizáciami na projektoch podporujúcich komunitné zapojenie a digitálnu inklúziu.">
-           Cooperation with municipalities, regional authorities, and NGOs on projects fostering community engagement and digital inclusion.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="news">
-    <h2 data-en="News" data-sk="Novinky">News</h2>
-    <p data-en="Coming soon: updates on our workshops, collaborations, and new project calls."
-       data-sk="Už čoskoro: novinky o našich workshopoch, spoluprácach a nových projektových výzvach.">
-       Coming soon: updates on our workshops, collaborations, and new project calls.
-    </p>
-  </section>
-
   <section id="contact">
     <h2 data-en="Contact" data-sk="Kontakt">Contact</h2>
     <p><strong data-en="Address:" data-sk="Adresa:">Address:</strong> J. Cirbusovej 770/5, 083 01 Sabinov, Slovakia</p>
-    <p><strong>Email:</strong> info@izex.sk</p>
-    <p><strong data-en="Phone:" data-sk="Telefón:">Phone:</strong> +421 XXX XXX XXX</p>
+    <p><strong>Email:</strong> marko.pribula@gmail.com</p>
+    <p><strong data-en="Phone:" data-sk="Telefón:">Phone:</strong> +421 905 478 420</p>
   </section>
 
   <footer>
@@ -140,13 +97,23 @@
     const skBtn = document.getElementById('sk-btn');
     const allElements = document.querySelectorAll('[data-en]');
 
-    enBtn.addEventListener('click', () => {
-      allElements.forEach(el => el.textContent = el.getAttribute('data-en'));
-    });
+    function setLanguage(lang) {
+      allElements.forEach(el => {
+        el.textContent = el.getAttribute(`data-${lang}`);
+      });
+    }
 
-    skBtn.addEventListener('click', () => {
-      allElements.forEach(el => el.textContent = el.getAttribute('data-sk'));
-    });
+    // Manual switch
+    enBtn.addEventListener('click', () => setLanguage('en'));
+    skBtn.addEventListener('click', () => setLanguage('sk'));
+
+    // Auto-detect based on browser language
+    const userLang = navigator.language || navigator.userLanguage;
+    if (userLang.startsWith('sk')) {
+      setLanguage('sk');
+    } else {
+      setLanguage('en');
+    }
   </script>
 </body>
 </html>
