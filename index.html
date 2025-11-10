@@ -6,11 +6,9 @@
   <title>Civic Association IZEX</title>
   <link rel="icon" type="image/png" href="IZEX LOGO.png" />
   <style>
-    /* Basic layout */
     :root{--accent:#2563eb;--nav:#1e3a8a;--text:#0f172a}
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--text)}
-    /* Video background container */
     .hero {
       position:relative;
       min-height:60vh;
@@ -22,13 +20,11 @@
     .video-wrap, .video-wrap video {
       position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
     }
-    /* overlay for readability */
     .overlay {
       position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,30,80,0.45), rgba(8,30,80,0.55));
       pointer-events:none;
     }
     header {position:relative; z-index:5; padding:1rem 1rem 2rem; text-align:center; color:#fff}
-    header .logo-link{position:absolute; left:1rem; top:1rem}
     header img{height:64px; border-radius:8px}
     header h1{margin:0; font-size:2rem}
     header p{margin:0.25rem 0 0.75rem}
@@ -37,14 +33,12 @@
     .lang-switch{position:absolute; right:1rem; top:0.6rem; z-index:7; display:flex; gap:0.5rem; align-items:center}
     .flag-btn{display:inline-flex; align-items:center; gap:0.4rem; padding:6px 8px; background:rgba(255,255,255,0.08); border-radius:6px; cursor:pointer; color:#fff}
     .flag-emoji{font-size:1.05rem}
-    /* content */
     main{position:relative; z-index:6; max-width:1100px; margin:2rem auto; padding:0 1rem}
     section{background:#fff; padding:1.2rem; border-radius:10px; margin-bottom:1rem; box-shadow:0 4px 18px rgba(2,6,23,0.06)}
     section h2{color:var(--nav); margin-top:0; border-left:4px solid var(--accent); padding-left:.6rem}
     .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem}
     .card{padding:1rem; background:#f8fafc; border-radius:8px}
-    footer{background:var(--nav); color:#fff; padding:1rem; text-align:center; margin-top:1.5rem; border-radius:0 0 0 0}
-    /* small screens */
+    footer{background:var(--nav); color:#fff; padding:1rem; text-align:center; margin-top:1.5rem; border-radius:0}
     @media (max-width:640px){
       header h1{font-size:1.4rem}
       .lang-switch{right:0.6rem; top:0.4rem}
@@ -52,21 +46,20 @@
   </style>
 </head>
 <body>
-  <!-- hero / video background -->
   <div class="hero" id="hero">
-    <div class="video-wrap" id="video-wrap" aria-hidden="true">
-      <!-- video element will be inserted by JS -->
-      <video id="bgVideo" playsinline muted autoplay loop></video>
+    <div class="video-wrap" aria-hidden="true">
+      <video id="video1" playsinline muted autoplay loop></video>
+      <video id="video2" playsinline muted autoplay loop style="opacity:0"></video>
     </div>
     <div class="overlay" aria-hidden="true"></div>
 
     <header>
-      </a>
       <h1 id="site-title" data-en="Civic Association IZEX" data-sk="Občianske združenie IZEX">Civic Association IZEX</h1>
-      <p id="site-sub" data-en="Connecting People, Innovation, and Digital Skills" data-sk="Spájame ľudí, inovácie a digitálne zručnosti">Connecting People, Innovation, and Digital Skills</p>
+      <p id="site-sub" data-en="Connecting People, Innovation, and Digital Skills" data-sk="Spájame ľudí, inovácie a digitálne zručnosti">
+        Connecting People, Innovation, and Digital Skills
+      </p>
     </header>
 
-    <!-- language & flags -->
     <div class="lang-switch" role="navigation" aria-label="Language switch">
       <div id="enFlag" class="flag-btn" title="English" aria-pressed="false">
         <span class="flag-emoji">🇬🇧</span><span data-en="EN" data-sk="EN">EN</span>
@@ -77,7 +70,6 @@
     </div>
   </div>
 
-  <!-- navigation bar -->
   <nav>
     <a href="#about" data-en="About" data-sk="O nás">About</a>
     <a href="#projects" data-en="Projects" data-sk="Projekty">Projects</a>
@@ -92,7 +84,7 @@
       <h2 data-en="About Us" data-sk="O nás">About Us</h2>
       <p data-en="Civic Association IZEX is a Slovak non-profit organisation promoting innovation, digital education, and community development. Our mission is to enhance digital skills, foster inclusion, and connect education, technology, and society."
          data-sk="Občianske združenie IZEX je slovenská nezisková organizácia podporujúca inovácie, digitálne vzdelávanie a rozvoj komunít. Naším cieľom je rozvíjať digitálne zručnosti, podporovať inklúziu a prepájať vzdelávanie, technológie a spoločnosť.">
-         Civic Association IZEX is a Slovak non-profit organisation promoting innovation, digital education, and community development. Our mission is to enhance digital skills, foster inclusion, and connect education, technology, and society.
+         Civic Association IZEX is a Slovak non-profit organisation promoting innovation, digital education, and community development.
       </p>
     </section>
 
@@ -113,13 +105,6 @@
              Connecting municipalities, NGOs, and businesses to promote digital inclusion and innovation in rural areas.
           </p>
         </div>
-        <div class="card">
-          <h3 data-en="Erasmus+ Cooperation" data-sk="Spolupráca v rámci programu Erasmus+">Erasmus+ Cooperation</h3>
-          <p data-en="Building partnerships across Europe to exchange best practices in digital education and training."
-             data-sk="Budujeme partnerstvá po celej Európe s cieľom výmeny najlepších skúseností v oblasti digitálneho vzdelávania a tréningu.">
-             Building partnerships across Europe to exchange best practices in digital education and training.
-          </p>
-        </div>
       </div>
     </section>
 
@@ -133,22 +118,7 @@
              Collaboration with European universities and research institutions on projects in digital education and innovation.
           </p>
         </div>
-        <div class="card">
-          <h3 data-en="Business and Technology" data-sk="Podniky a technológie">Business and Technology</h3>
-          <p data-en="Partnerships with SMEs and technology companies supporting digital transformation, innovation, and training initiatives."
-             data-sk="Partnerstvá s MSP a technologickými firmami, ktoré podporujú digitálnu transformáciu, inovácie a vzdelávacie iniciatívy.">
-             Partnerships with SMEs and technology companies supporting digital transformation, innovation, and training initiatives.
-          </p>
-        </div>
       </div>
-    </section>
-
-    <section id="news">
-      <h2 data-en="News" data-sk="Novinky">News</h2>
-      <p data-en="Coming soon: updates on our workshops, collaborations, and new project calls."
-         data-sk="Už čoskoro: novinky o našich workshopoch, spoluprácach a nových projektových výzvach.">
-         Coming soon: updates on our workshops, collaborations, and new project calls.
-      </p>
     </section>
 
     <section id="contact">
@@ -167,56 +137,54 @@
   </footer>
 
   <script>
-    /********** Video sources: replace these demo URLs with direct MP4 links from Pexels if available **********/
-    const videoSources = ["https://github.com/markopribula-web/IZEX-WEB/raw/refs/heads/main/5940170-uhd_3840_2160_25fps.mp4","https://github.com/markopribula-web/IZEX-WEB/raw/refs/heads/main/6281071-uhd_3840_2160_24fps.mp4","https://github.com/markopribula-web/IZEX-WEB/raw/refs/heads/main/7683445-hd_1080_1920_30fps.mp4"];
+    // 🎬 Smooth crossfade video rotation
+    const videoSources = [
+      "https://github.com/markopribula-web/IZEX-WEB/raw/refs/heads/main/5940170-uhd_3840_2160_25fps.mp4",
+      "https://github.com/markopribula-web/IZEX-WEB/raw/refs/heads/main/6281071-uhd_3840_2160_24fps.mp4",
+      "https://github.com/markopribula-web/IZEX-WEB/raw/refs/heads/main/7683445-hd_1080_1920_30fps.mp4"
+    ];
 
-    const bgVideo = document.getElementById('bgVideo');
     let current = 0;
+    const v1 = document.getElementById('video1');
+    const v2 = document.getElementById('video2');
+    let active = v1;
 
-    function loadVideo(idx){
-      // set src and try to play
-      bgVideo.src = videoSources[idx];
-      bgVideo.load();
-      bgVideo.play().catch(()=>{/* autoplay may be blocked on some mobile browsers */});
+    function nextVideo() {
+      const next = active === v1 ? v2 : v1;
+      current = (current + 1) % videoSources.length;
+
+      next.src = videoSources[current];
+      next.load();
+      next.play().catch(()=>{});
+
+      next.style.transition = "opacity 2.5s ease-in-out";
+      active.style.transition = "opacity 2.5s ease-in-out";
+      next.style.opacity = 1;
+      active.style.opacity = 0;
+
+      active = next;
     }
 
-    // Cycle videos every N seconds (e.g., show each for 10s)
-    const DISPLAY_SECONDS = 10;
-    loadVideo(current);
-    setInterval(() => {
-      current = (current + 1) % videoSources.length;
-      // fade effect
-      document.querySelector('.video-wrap').style.opacity = 0;
-      setTimeout(() => {
-        loadVideo(current);
-        document.querySelector('.video-wrap').style.opacity = 1;
-      }, 500);
-    }, DISPLAY_SECONDS * 1000);
+    v1.src = videoSources[0];
+    v1.play().catch(()=>{});
+    setInterval(nextVideo, 12000);
 
-    /********** Language switching (auto-detect + manual) **********/
+    // 🌍 Language switching
     const enBtn = document.getElementById('enFlag');
     const skBtn = document.getElementById('skFlag');
     const allElements = document.querySelectorAll('[data-en]');
-
     function setLanguage(lang){
       allElements.forEach(el => {
         const txt = el.getAttribute('data-' + lang);
         if(txt !== null) el.textContent = txt;
       });
-      // update aria-pressed
       enBtn.setAttribute('aria-pressed', lang === 'en');
       skBtn.setAttribute('aria-pressed', lang === 'sk');
     }
-
     enBtn.addEventListener('click', ()=>setLanguage('en'));
     skBtn.addEventListener('click', ()=>setLanguage('sk'));
-
-    // Auto-detect browser language (use SK if startsWith 'sk', else EN)
     const userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
     if(userLang.startsWith('sk')) setLanguage('sk'); else setLanguage('en');
-
-    /********** Accessibility: if video playback prevented, ensure overlay and content visible **********/
-    bgVideo.addEventListener('error', ()=>{ console.warn('Background video failed to load.'); });
   </script>
 </body>
 </html>
